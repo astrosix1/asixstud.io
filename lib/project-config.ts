@@ -72,7 +72,7 @@ export const PROJECTS = {
 
 export const SOCIAL_LINKS = [
   { name: 'GitHub', url: 'https://github.com', icon: 'Github' },
-  { name: 'LinkedIn', url: 'https://linkedin.com', icon: 'Linkedin' },
+  { name: 'LinkedIn', url: 'https://linkedin.com', icon: 'LinkedIn' },
   { name: 'Twitter', url: 'https://twitter.com', icon: 'Twitter' },
   { name: 'Email', url: 'mailto:hello@asixstud.io', icon: 'Mail' },
 ];

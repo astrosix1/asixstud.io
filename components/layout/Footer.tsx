@@ -1,16 +1,8 @@
 import Link from 'next/link';
-import { Github, Linkedin, Twitter, Mail } from 'lucide-react';
 import { SOCIAL_LINKS } from '@/lib/project-config';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-
-  const socialIcons: { [key: string]: any } = {
-    Github,
-    Linkedin,
-    Twitter,
-    Mail,
-  };
 
   return (
     <footer className="bg-slate-950 dark:bg-slate-900 text-white border-t border-slate-800">
@@ -47,23 +39,20 @@ export default function Footer() {
           {/* Social Links */}
           <div>
             <h4 className="font-semibold mb-4">Connect</h4>
-            <div className="flex gap-4">
-              {SOCIAL_LINKS.map((link) => {
-                const Icon = socialIcons[link.icon];
-                return (
+            <ul className="space-y-2 text-sm">
+              {SOCIAL_LINKS.map((link) => (
+                <li key={link.name}>
                   <a
-                    key={link.name}
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-slate-400 hover:text-white transition-colors"
-                    aria-label={link.name}
                   >
-                    <Icon size={20} />
+                    {link.name}
                   </a>
-                );
-              })}
-            </div>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
