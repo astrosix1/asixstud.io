@@ -4,7 +4,7 @@ import { getStripePriceId } from '@/lib/stripe-prices';
 import { supabase } from '@/lib/supabase';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
-  apiVersion: '2025-01-27.acacia',
+  apiVersion: '2025-02-24.acacia',
 });
 
 export async function POST(req: NextRequest) {

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { createClient } from '@supabase/supabase-js';
+import { createBrowserClient } from '@supabase/auth-helpers-nextjs';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -15,7 +15,7 @@ export default function LoginPage() {
     return <div className="text-red-500">Supabase not configured</div>;
   }
 
-  const supabase = createClient(supabaseUrl, supabaseAnonKey);
+  const supabase = createBrowserClient(supabaseUrl, supabaseAnonKey);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

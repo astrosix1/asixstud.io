@@ -36,7 +36,7 @@ export default function SuccessPage() {
         setSessionStatus(data);
       } catch (error) {
         console.error('Error fetching session status:', error);
-        setSessionStatus({ error: 'Failed to retrieve payment status' });
+        setSessionStatus({ status: 'error', error: 'Failed to retrieve payment status' });
       } finally {
         setLoading(false);
       }
