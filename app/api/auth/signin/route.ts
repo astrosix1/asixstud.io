@@ -46,8 +46,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create response with session
-    const response = NextResponse.json({ success: true });
+    // Create response with session — include tokens so client can call setSession()
+    const response = NextResponse.json({
+      success: true,
+      access_token: data.session.access_token,
+      refresh_token: data.session.refresh_token,
+    });
 
     // Set httpOnly cookies for cross-subdomain sharing
     const { access_token, refresh_token } = data.session;

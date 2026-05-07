@@ -2,20 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { createBrowserClient } from '@supabase/auth-helpers-nextjs';
+import { supabase } from '@/lib/supabase';
 
 export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-  if (!supabaseUrl || !supabaseAnonKey) {
-    return <div className="text-red-500">Supabase not configured</div>;
-  }
-
-  const supabase = createBrowserClient(supabaseUrl, supabaseAnonKey);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,10 +18,10 @@ export default function LoginPage() {
 
   // Check if already logged in
   useEffect(() => {
+    if (!supabase) return;
     const checkAuth = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
-        // Already logged in, redirect
         router.push(redirectUri);
       }
     };
@@ -50,13 +41,23 @@ export default function LoginPage() {
         body: JSON.stringify({ email, password }),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        const data = await response.json();
         setError(data.error || 'Login failed');
         return;
       }
 
-      // Redirect back to the app after successful login
+      // Set the session client-side so CrossDomainCookieStorage writes
+      // a readable cookie with Domain=.asix.live that subdomains can access
+      if (supabase && data.access_token && data.refresh_token) {
+        await supabase.auth.setSession({
+          access_token: data.access_token,
+          refresh_token: data.refresh_token,
+        });
+      }
+
+      // Redirect back to the originating app
       router.push(redirectUri);
     } catch (err) {
       setError('An error occurred. Please try again.');
@@ -71,6 +72,7 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
+      if (!supabase) throw new Error('Supabase not configured');
       const { error } = await supabase.auth.signUp({
         email,
         password,
@@ -84,7 +86,6 @@ export default function LoginPage() {
         return;
       }
 
-      setError(null);
       setEmail('');
       setPassword('');
       setError('Check your email to confirm your account, then sign in.');

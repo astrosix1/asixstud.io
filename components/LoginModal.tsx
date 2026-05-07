@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { signIn, signUp } from '@/lib/auth';
+import { signUp } from '@/lib/auth';
+import { supabase } from '@/lib/supabase';
 import { useRouter } from 'next/navigation';
 
 interface LoginModalProps {
@@ -42,6 +43,17 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
           if (!response.ok) {
             setError(data.error || 'Sign in failed');
             return;
+          }
+
+          // Set the session client-side so CrossDomainCookieStorage writes
+          // a readable cookie with Domain=.asix.live (httpOnly cookies can't
+          // be read by JavaScript, so we need this readable version too)
+          if (supabase && data.access_token && data.refresh_token) {
+            await supabase.auth.setSession({
+              access_token: data.access_token,
+              refresh_token: data.refresh_token,
+            });
+            console.log('Session set in browser client with cross-domain cookie');
           }
 
           // Signin succeeded - clear form and redirect
