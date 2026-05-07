@@ -49,8 +49,7 @@ export default function LoginPage() {
         return;
       }
 
-      // Set the session client-side so CrossDomainCookieStorage writes
-      // a readable cookie with Domain=.asix.live that subdomains can access
+      // Set the session client-side for asix.live itself
       if (supabase && data.access_token && data.refresh_token) {
         await supabase.auth.setSession({
           access_token: data.access_token,
@@ -58,8 +57,19 @@ export default function LoginPage() {
         });
       }
 
-      // Redirect back to the originating app
-      router.push(redirectUri);
+      // If redirecting to another subdomain (e.g. ascend.asix.live),
+      // pass tokens in the URL hash so the subdomain can call setSession().
+      // The hash is never sent to servers, avoiding log exposure.
+      const isExternalRedirect = redirectUri.startsWith('http') &&
+        !redirectUri.includes('asix.live') === false &&
+        !redirectUri.startsWith(window.location.origin);
+
+      if (isExternalRedirect && data.access_token && data.refresh_token) {
+        const hash = `#access_token=${encodeURIComponent(data.access_token)}&refresh_token=${encodeURIComponent(data.refresh_token)}`;
+        window.location.href = redirectUri + hash;
+      } else {
+        router.push(redirectUri);
+      }
     } catch (err) {
       setError('An error occurred. Please try again.');
     } finally {
