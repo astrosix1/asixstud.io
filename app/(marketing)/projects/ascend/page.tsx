@@ -6,6 +6,7 @@ import { getProject } from '@/lib/get-project';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { ArrowRight } from 'lucide-react';
+import { LaunchAscendButton } from '@/components/projects/LaunchAscendButton';
 
 export const metadata = {
   title: 'Ascend | asixstud.io',
@@ -66,14 +67,7 @@ export default function AscendProject() {
           <p className="text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto">
             Launch the Ascend app and start your journey to replace addictions with hobbies today.
           </p>
-          {project.externalUrl && (
-            <Link href={project.externalUrl} target="_blank" rel="noopener noreferrer">
-              <Button size="lg" className="gap-2 px-8" variant="outline">
-                Launch Ascend App
-                <ArrowRight size={18} />
-              </Button>
-            </Link>
-          )}
+          <LaunchAscendButton />
         </section>
 
         {/* Description */}
