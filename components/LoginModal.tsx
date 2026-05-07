@@ -31,18 +31,24 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, password }),
+          credentials: 'include', // Include cookies in request/response
         });
 
-        if (!response.ok) {
-          const data = await response.json();
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
           setError(data.error || 'Sign in failed');
           return;
         }
 
+        // Signin succeeded - reset form and close modal
         setEmail('');
         setPassword('');
+        setError(null);
         onClose();
-        router.refresh();
+
+        // Refresh page to pick up new auth state
+        window.location.reload();
       } else {
         // Sign up mode
         if (password !== confirmPassword) {
