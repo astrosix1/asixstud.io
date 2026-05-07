@@ -46,15 +46,29 @@ export default function AscendProject() {
           </div>
         </section>
 
-        {/* Live App CTA */}
-        <section className="mb-16 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950 rounded-lg p-12 text-center border border-blue-200 dark:border-blue-800">
-          <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">Experience Ascend</h2>
+        {/* Subscribe CTA — shown to users redirected from ascend.asix.live */}
+        <section className="mb-8 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950 dark:to-orange-950 rounded-lg p-12 text-center border border-amber-200 dark:border-amber-800">
+          <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">Get Access to Ascend</h2>
           <p className="text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto">
-            Ready to replace your addictions with hobbies? Launch the full Ascend app and start your journey to change today.
+            Subscribe to unlock the full Ascend app — unlimited habit tracking, cloud sync, community features, and more.
+          </p>
+          <Link href="/checkout">
+            <Button size="lg" className="gap-2 px-8">
+              Subscribe Now
+              <ArrowRight size={18} />
+            </Button>
+          </Link>
+        </section>
+
+        {/* Live App CTA — for returning subscribers */}
+        <section className="mb-16 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950 rounded-lg p-12 text-center border border-blue-200 dark:border-blue-800">
+          <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">Already Subscribed?</h2>
+          <p className="text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto">
+            Launch the Ascend app and start your journey to replace addictions with hobbies today.
           </p>
           {project.externalUrl && (
             <Link href={project.externalUrl} target="_blank" rel="noopener noreferrer">
-              <Button size="lg" className="gap-2 px-8">
+              <Button size="lg" className="gap-2 px-8" variant="outline">
                 Launch Ascend App
                 <ArrowRight size={18} />
               </Button>
