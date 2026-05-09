@@ -45,27 +45,32 @@ export default function GeoIntelProject() {
           </div>
         </section>
 
-        {/* Subscribe CTA — shown to users redirected from geointel.asix.live */}
-        <section className="mb-8 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950 dark:to-orange-950 rounded-lg p-12 text-center border border-amber-200 dark:border-amber-800">
-          <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">Get Access to GeoIntel</h2>
-          <p className="text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto">
-            Subscribe to unlock the full GeoIntel platform — real-time crisis tracking, actor intelligence, relationship mapping, and AI-powered briefings.
-          </p>
-          <Link href="/checkout">
-            <Button size="lg" className="gap-2 px-8">
-              Subscribe Now
-              <ArrowRight size={18} />
-            </Button>
-          </Link>
-        </section>
+        {/* Action Cards */}
+        <section className="mb-16 grid md:grid-cols-2 gap-6">
+          <Card>
+            <CardContent className="pt-6">
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Subscribe to GeoIntel</h3>
+              <p className="text-slate-600 dark:text-slate-400 mb-4">
+                Unlock real-time crisis tracking, actor intelligence, and geopolitical briefings.
+              </p>
+              <Link href="/checkout">
+                <Button size="lg" className="w-full gap-2">
+                  Subscribe Now
+                  <ArrowRight size={18} />
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
 
-        {/* Live App CTA — for returning subscribers */}
-        <section className="mb-16 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950 rounded-lg p-12 text-center border border-blue-200 dark:border-blue-800">
-          <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">Already Subscribed?</h2>
-          <p className="text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto">
-            Launch GeoIntel and monitor global events on the interactive 3D globe.
-          </p>
-          <LaunchGeoIntelButton />
+          <Card>
+            <CardContent className="pt-6">
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Launch GeoIntel</h3>
+              <p className="text-slate-600 dark:text-slate-400 mb-4">
+                Open the interactive 3D globe and monitor global events in real-time.
+              </p>
+              <LaunchGeoIntelButton />
+            </CardContent>
+          </Card>
         </section>
 
         {/* Description */}
