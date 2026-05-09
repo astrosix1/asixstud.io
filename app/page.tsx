@@ -68,6 +68,25 @@ export default async function Home() {
                 </div>
               </div>
             </Link>
+            <Link href="/projects/geointel" className="group">
+              <div className="bg-white border border-gray-200 rounded-xl p-8 hover:shadow-lg transition-shadow duration-300">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold">
+                    G
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold">GeoIntel</h3>
+                    <p className="text-sm text-gray-500">Geopolitical Intelligence</p>
+                  </div>
+                </div>
+                <p className="text-gray-600 mb-4">Real-time global event tracking and geopolitical intelligence on an interactive 3D globe.</p>
+                <div className="flex gap-2">
+                  <span className="text-xs bg-cyan-100 text-cyan-700 px-3 py-1 rounded-full">Flask</span>
+                  <span className="text-xs bg-cyan-100 text-cyan-700 px-3 py-1 rounded-full">Canvas API</span>
+                  <span className="text-xs bg-cyan-100 text-cyan-700 px-3 py-1 rounded-full">Supabase</span>
+                </div>
+              </div>
+            </Link>
           </div>
         </div>
       </div>
