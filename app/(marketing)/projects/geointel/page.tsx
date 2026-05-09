@@ -4,6 +4,7 @@ import { getProject } from '@/lib/get-project';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { ArrowRight } from 'lucide-react';
+import { LaunchGeoIntelButton } from '@/components/projects/LaunchGeoIntelButton';
 
 export const metadata = {
   title: 'GeoIntel | asixstud.io',
@@ -67,12 +68,9 @@ export default function GeoIntelProject() {
               <p className="text-slate-600 dark:text-slate-400 mb-4">
                 Open the interactive 3D globe and monitor global events in real-time.
               </p>
-              <Link href="https://geointel.asix.live" target="_blank">
-                <Button size="lg" className="w-full gap-2">
-                  Launch GeoIntel
-                  <ArrowRight size={18} />
-                </Button>
-              </Link>
+              <div className="w-full">
+                <LaunchGeoIntelButton />
+              </div>
             </CardContent>
           </Card>
         </section>
@@ -97,12 +95,7 @@ export default function GeoIntelProject() {
             Discover what's happening around the world with GeoIntel's interactive globe.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="https://geointel.asix.live" target="_blank">
-              <Button size="lg" className="gap-2">
-                Launch GeoIntel
-                <ArrowRight size={18} />
-              </Button>
-            </Link>
+            <LaunchGeoIntelButton />
             <Link href="/contact">
               <Button size="lg" variant="outline">
                 Get in Touch
