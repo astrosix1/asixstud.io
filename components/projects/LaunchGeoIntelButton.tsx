@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Button } from '@/components/ui/Button';
 import { ArrowRight } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 
@@ -30,10 +29,10 @@ export function LaunchGeoIntelButton() {
 
   return (
     <a href={href} target="_blank" rel="noopener noreferrer">
-      <Button size="lg" className="gap-2 px-8" variant="outline">
+      <button className="flex items-center gap-2 px-8 py-4 border-2 border-slate-600 text-slate-300 rounded-lg font-semibold text-lg hover:border-slate-500 hover:bg-slate-800 transition-colors">
         Launch GeoIntel
-        <ArrowRight size={18} />
-      </Button>
+        <ArrowRight size={20} />
+      </button>
     </a>
   );
 }

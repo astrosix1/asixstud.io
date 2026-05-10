@@ -40,3 +40,13 @@ export async function getCurrentUser() {
   const { data } = await supabase.auth.getUser();
   return data.user;
 }
+
+export async function updateUserEmail(newEmail: string) {
+  const supabase = await getSupabase();
+  return await supabase.auth.updateUser({ email: newEmail });
+}
+
+export async function updateUserPassword(newPassword: string) {
+  const supabase = await getSupabase();
+  return await supabase.auth.updateUser({ password: newPassword });
+}

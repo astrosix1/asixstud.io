@@ -12,19 +12,16 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [mode, setMode] = useState<'signin' | 'signup'>('signin');
 
-  // Get the redirect URL from query params
   const redirectUri = searchParams.get('redirect') || '/';
 
-  // Check if already logged in
   useEffect(() => {
     const sb = supabase;
     if (!sb) return;
     const checkAuth = async () => {
       const { data: { session } } = await sb.auth.getSession();
-      if (session) {
-        router.push(redirectUri);
-      }
+      if (session) router.push(redirectUri);
     };
     checkAuth();
   }, []);
@@ -35,7 +32,6 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      // Use server-side API route to sign in (sets httpOnly cookies with .asix.live domain)
       const response = await fetch('/api/auth/signin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -49,7 +45,6 @@ export default function LoginPage() {
         return;
       }
 
-      // Set the session client-side for asix.live itself
       if (supabase && data.access_token && data.refresh_token) {
         await supabase.auth.setSession({
           access_token: data.access_token,
@@ -57,9 +52,6 @@ export default function LoginPage() {
         });
       }
 
-      // If redirecting to another subdomain (e.g. ascend.asix.live),
-      // pass tokens in the URL hash so the subdomain can call setSession().
-      // The hash is never sent to servers, avoiding log exposure.
       const isExternalRedirect = redirectUri.startsWith('http') &&
         !redirectUri.includes('asix.live') === false &&
         !redirectUri.startsWith(window.location.origin);
@@ -70,7 +62,7 @@ export default function LoginPage() {
       } else {
         router.push(redirectUri);
       }
-    } catch (err) {
+    } catch {
       setError('An error occurred. Please try again.');
     } finally {
       setLoading(false);
@@ -87,9 +79,7 @@ export default function LoginPage() {
       const { error } = await supabase.auth.signUp({
         email,
         password,
-        options: {
-          emailRedirectTo: `${window.location.origin}/auth/callback`,
-        },
+        options: { emailRedirectTo: `${window.location.origin}/auth/callback` },
       });
 
       if (error) {
@@ -100,7 +90,7 @@ export default function LoginPage() {
       setEmail('');
       setPassword('');
       setError('Check your email to confirm your account, then sign in.');
-    } catch (err) {
+    } catch {
       setError('An error occurred. Please try again.');
     } finally {
       setLoading(false);
@@ -108,43 +98,74 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4">
       <div className="w-full max-w-md">
-        <div className="bg-gray-800 rounded-lg shadow-xl p-8">
-          <h1 className="text-3xl font-bold text-white mb-2">Welcome to asix.live</h1>
-          <p className="text-gray-400 mb-8">Sign in to your account to continue</p>
+        {/* Logo / Brand */}
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-slate-900">asix<span className="text-blue-600">.live</span></h1>
+          <p className="text-slate-600 mt-2">Sign in to access your apps</p>
+        </div>
+
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-8">
+          {/* Mode toggle */}
+          <div className="flex rounded-lg border border-slate-200 p-1 mb-6">
+            <button
+              onClick={() => { setMode('signin'); setError(null); }}
+              className={`flex-1 py-2 text-sm font-medium rounded-md transition-all ${
+                mode === 'signin'
+                  ? 'bg-slate-900 text-white shadow-sm'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              Sign In
+            </button>
+            <button
+              onClick={() => { setMode('signup'); setError(null); }}
+              className={`flex-1 py-2 text-sm font-medium rounded-md transition-all ${
+                mode === 'signup'
+                  ? 'bg-slate-900 text-white shadow-sm'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              Create Account
+            </button>
+          </div>
 
           {error && (
-            <div className={`mb-6 p-4 rounded ${error.includes('email') ? 'bg-yellow-500/10 border border-yellow-500/50 text-yellow-500' : 'bg-red-500/10 border border-red-500/50 text-red-500'}`}>
+            <div className={`mb-5 p-4 rounded-lg text-sm ${
+              error.includes('email') || error.includes('Check')
+                ? 'bg-blue-50 border border-blue-200 text-blue-700'
+                : 'bg-red-50 border border-red-200 text-red-700'
+            }`}>
               {error}
             </div>
           )}
 
-          <form onSubmit={handleLogin} className="space-y-4">
+          <form onSubmit={mode === 'signin' ? handleLogin : handleSignUp} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">
                 Email
               </label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
-                placeholder="Enter your email"
+                className="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                placeholder="you@example.com"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">
                 Password
               </label>
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
-                placeholder="Enter your password"
+                className="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                placeholder="••••••••"
                 required
               />
             </div>
@@ -152,28 +173,17 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-medium py-2 rounded transition-colors"
+              className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-medium py-2.5 rounded-lg transition-colors mt-2"
             >
-              {loading ? 'Signing in...' : 'Sign In'}
+              {loading
+                ? (mode === 'signin' ? 'Signing in...' : 'Creating account...')
+                : (mode === 'signin' ? 'Sign In' : 'Create Account')
+              }
             </button>
           </form>
 
-          <div className="my-6 flex items-center">
-            <div className="flex-1 h-px bg-gray-600"></div>
-            <span className="px-3 text-gray-400 text-sm">or</span>
-            <div className="flex-1 h-px bg-gray-600"></div>
-          </div>
-
-          <button
-            onClick={handleSignUp}
-            disabled={loading || !email || !password}
-            className="w-full bg-gray-700 hover:bg-gray-600 disabled:opacity-50 text-white font-medium py-2 rounded transition-colors"
-          >
-            {loading ? 'Creating account...' : 'Create New Account'}
-          </button>
-
-          <p className="text-center text-gray-400 text-sm mt-6">
-            This account will give you access to all asix apps and services.
+          <p className="text-center text-slate-500 text-xs mt-6">
+            Your account gives you access to all asix apps and services.
           </p>
         </div>
       </div>

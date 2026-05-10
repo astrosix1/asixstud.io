@@ -4,7 +4,7 @@ import { Project } from '@/lib/projects';
 export function ProjectCard({ project }: { project: Project }) {
   return (
     <Link href={`/projects/${project.slug}`}>
-      <div className="group bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300 cursor-pointer hover:border-gray-300">
+      <div className="group bg-white border border-slate-200 rounded-xl p-6 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 cursor-pointer hover:border-blue-300">
         <div className="space-y-4">
           {project.icon_url && (
             <div className="h-10 w-10">
@@ -13,10 +13,10 @@ export function ProjectCard({ project }: { project: Project }) {
           )}
 
           <div>
-            <h3 className="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+            <h3 className="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
               {project.name}
             </h3>
-            <p className="mt-2 text-gray-600 text-sm leading-relaxed line-clamp-3">
+            <p className="mt-2 text-slate-600 text-sm leading-relaxed line-clamp-3">
               {project.description}
             </p>
           </div>
@@ -25,7 +25,7 @@ export function ProjectCard({ project }: { project: Project }) {
             {project.tech_stack.slice(0, 3).map((tech) => (
               <span
                 key={tech}
-                className="text-xs font-medium bg-gray-100 text-gray-700 px-3 py-1 rounded-full"
+                className="text-xs font-medium bg-blue-50 text-blue-700 px-3 py-1 rounded-full"
               >
                 {tech}
               </span>

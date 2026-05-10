@@ -78,7 +78,7 @@ export default function CheckoutPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-gray-600">Loading...</div>
+        <div className="text-slate-600">Loading...</div>
       </div>
     );
   }
@@ -88,13 +88,13 @@ export default function CheckoutPage() {
       <div className="min-h-screen bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">Sign In to Subscribe</h1>
-            <p className="text-gray-600 mb-8">
+            <h1 className="text-3xl font-bold text-slate-900 mb-4">Sign In to Subscribe</h1>
+            <p className="text-slate-600 mb-8">
               Please sign in to your asix account to view subscriptions
             </p>
             <Link
               href="/"
-              className="inline-block px-8 py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors"
+              className="inline-block px-8 py-3 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition-colors"
             >
               Go Home
             </Link>
@@ -105,12 +105,12 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Subscribe to Apps</h1>
-          <p className="text-lg text-gray-600">
+          <h1 className="text-4xl font-bold text-slate-900 mb-4">Subscribe to Apps</h1>
+          <p className="text-lg text-slate-600">
             Choose the apps you want to access. Select multiple to get a bundle!
           </p>
         </div>
@@ -124,20 +124,20 @@ export default function CheckoutPage() {
                 className={`border-2 rounded-lg p-6 cursor-pointer transition-all ${
                   isInCart(app.slug)
                     ? 'border-blue-600 bg-blue-50'
-                    : 'border-gray-200 bg-white hover:border-gray-300'
+                    : 'border-slate-200 bg-white hover:border-slate-300'
                 }`}
                 onClick={() => addToCart(app.slug, app.name)}
               >
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <h3 className="text-xl font-bold text-gray-900">{app.name}</h3>
-                    <p className="text-gray-600 mt-2">{app.description}</p>
+                    <h3 className="text-xl font-bold text-slate-900">{app.name}</h3>
+                    <p className="text-slate-600 mt-2">{app.description}</p>
                   </div>
                   <div className="text-right ml-4">
-                    <p className="text-2xl font-bold text-gray-900">
+                    <p className="text-2xl font-bold text-slate-900">
                       {formatPrice(APP_PRICES[app.slug]?.pro || 0)}
                     </p>
-                    <p className="text-sm text-gray-600">/month</p>
+                    <p className="text-sm text-slate-600">/month</p>
                   </div>
                 </div>
 
@@ -147,9 +147,9 @@ export default function CheckoutPage() {
                     type="checkbox"
                     checked={isInCart(app.slug)}
                     onChange={() => {}} // Controlled by parent onClick
-                    className="w-5 h-5 rounded border-gray-300"
+                    className="w-5 h-5 rounded border-slate-300"
                   />
-                  <span className="ml-2 text-sm font-medium text-gray-700">
+                  <span className="ml-2 text-sm font-medium text-slate-700">
                     {isInCart(app.slug) ? 'Added to cart' : 'Add to cart'}
                   </span>
                 </div>
@@ -159,25 +159,25 @@ export default function CheckoutPage() {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-white border border-gray-200 rounded-lg p-6 sticky top-20">
-              <h2 className="text-xl font-bold text-gray-900 mb-6">Order Summary</h2>
+            <div className="bg-white border border-slate-200 rounded-lg p-6 sticky top-20">
+              <h2 className="text-xl font-bold text-slate-900 mb-6">Order Summary</h2>
 
               {cart.length === 0 ? (
-                <p className="text-gray-600 text-center py-8">No items in cart</p>
+                <p className="text-slate-600 text-center py-8">No items in cart</p>
               ) : (
                 <>
-                  <div className="space-y-4 mb-6 pb-6 border-b border-gray-200">
+                  <div className="space-y-4 mb-6 pb-6 border-b border-slate-200">
                     {cart.map((item) => (
                       <div key={item.appSlug} className="flex justify-between">
-                        <span className="text-gray-700">{item.appName}</span>
-                        <span className="font-medium text-gray-900">{formatPrice(item.price)}</span>
+                        <span className="text-slate-700">{item.appName}</span>
+                        <span className="font-medium text-slate-900">{formatPrice(item.price)}</span>
                       </div>
                     ))}
                   </div>
 
                   <div className="flex justify-between items-center mb-6">
-                    <span className="text-lg font-bold text-gray-900">Total:</span>
-                    <span className="text-2xl font-bold text-gray-900">
+                    <span className="text-lg font-bold text-slate-900">Total:</span>
+                    <span className="text-2xl font-bold text-slate-900">
                       {formatPrice(total)}
                     </span>
                   </div>
@@ -185,12 +185,12 @@ export default function CheckoutPage() {
                   <button
                     onClick={handleCheckout}
                     disabled={processing}
-                    className="w-full py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full py-3 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {processing ? 'Processing...' : 'Proceed to Payment'}
                   </button>
 
-                  <p className="text-xs text-gray-600 text-center mt-4">
+                  <p className="text-xs text-slate-600 text-center mt-4">
                     You'll be redirected to Stripe to complete payment
                   </p>
                 </>

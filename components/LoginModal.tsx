@@ -108,13 +108,13 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
         <div className="bg-white rounded-xl shadow-lg max-w-md w-full">
           {/* Header */}
-          <div className="flex justify-between items-center p-6 border-b border-gray-100">
-            <h2 className="text-xl font-bold text-gray-900">
+          <div className="flex justify-between items-center p-6 border-b border-slate-200">
+            <h2 className="text-xl font-bold text-slate-900">
               {mode === 'signin' ? 'Sign In' : 'Create Account'}
             </h2>
             <button
               onClick={onClose}
-              className="text-gray-500 hover:text-gray-700 transition-colors"
+              className="text-slate-500 hover:text-slate-700 transition-colors"
             >
               ✕
             </button>
@@ -136,7 +136,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                   setMode('signin');
                   setEmail('');
                 }}
-                className="w-full py-2 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors"
+                className="w-full py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
               >
                 Go Back to Sign In
               </button>
@@ -145,7 +145,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
             <form onSubmit={handleSubmit} className="p-6 space-y-4">
             {/* Email */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-900 mb-2">
+              <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2">
                 Email
               </label>
               <input
@@ -155,13 +155,13 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
                 required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                className="w-full px-4 py-2 border border-slate-300 rounded-lg placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
 
             {/* Password */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-900 mb-2">
+              <label htmlFor="password" className="block text-sm font-medium text-slate-700 mb-2">
                 Password
               </label>
               <input
@@ -171,14 +171,14 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
                 required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                className="w-full px-4 py-2 border border-slate-300 rounded-lg placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
 
             {/* Confirm Password (Sign Up only) */}
             {mode === 'signup' && (
               <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-900 mb-2">
+                <label htmlFor="confirmPassword" className="block text-sm font-medium text-slate-700 mb-2">
                   Confirm Password
                 </label>
                 <input
@@ -188,7 +188,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="••••••••"
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                  className="w-full px-4 py-2 border border-slate-300 rounded-lg placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
             )}
@@ -204,7 +204,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-2 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-2.5 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading
                 ? (mode === 'signin' ? 'Signing In...' : 'Creating Account...')
@@ -213,7 +213,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
             </button>
 
             {/* Toggle Sign In / Sign Up */}
-            <p className="text-center text-sm text-gray-600">
+            <p className="text-center text-sm text-slate-600">
               {mode === 'signin' ? "Don't have an account? " : 'Already have an account? '}
               <button
                 type="button"
@@ -223,7 +223,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                   setPassword('');
                   setConfirmPassword('');
                 }}
-                className="text-gray-900 font-medium hover:underline"
+                className="text-blue-600 font-medium hover:underline"
               >
                 {mode === 'signin' ? 'Sign Up' : 'Sign In'}
               </button>

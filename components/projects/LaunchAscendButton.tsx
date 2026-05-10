@@ -1,8 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { Button } from '@/components/ui/Button';
 import { ArrowRight } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 
@@ -31,10 +29,10 @@ export function LaunchAscendButton() {
 
   return (
     <a href={href} target="_blank" rel="noopener noreferrer">
-      <Button size="lg" className="gap-2 px-8" variant="outline">
-        Launch Ascend App
-        <ArrowRight size={18} />
-      </Button>
+      <button className="flex items-center gap-2 px-8 py-4 border-2 border-slate-600 text-slate-300 rounded-lg font-semibold text-lg hover:border-slate-500 hover:bg-slate-800 transition-colors">
+        Launch Ascend
+        <ArrowRight size={20} />
+      </button>
     </a>
   );
 }
