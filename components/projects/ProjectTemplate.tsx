@@ -167,6 +167,24 @@ const FEATURES = {
   },
 };
 
+// ── Screenshot galleries ────────────────────────────────────────────────────
+const SCREENSHOTS = {
+  ascend: [
+    { src: '/images/projects/ascend-dashboard.png', alt: 'Ascend Dashboard' },
+    { src: '/images/projects/ascend-events.png', alt: 'Ascend Discover Events' },
+    { src: '/images/projects/ascend-graphs.png', alt: 'Ascend Progress Graphs' },
+    { src: '/images/projects/ascend-timer.png', alt: 'Ascend Pomodoro Timer' },
+  ],
+  geointel: [
+    { src: '/images/projects/geointel-dashboard.png', alt: 'GeoIntel Dashboard' },
+    { src: '/images/projects/geointel-brief.png', alt: 'GeoIntel Brief' },
+    { src: '/images/projects/geointel-forecast.png', alt: 'GeoIntel Forecast' },
+    { src: '/images/projects/geointel-relationships.png', alt: 'GeoIntel Relationships' },
+    { src: '/images/projects/geointel-trend.png', alt: 'GeoIntel Trend' },
+  ],
+  wikihole: [],
+};
+
 // ── About copy ───────────────────────────────────────────────────────────────
 const ABOUT_EXTRA = {
   ascend: 'Whether you\'re looking to kick a habit or build a positive one, Ascend provides the tools, community, and motivation to succeed. Track your progress, compete with friends, and celebrate milestones along the way.',
@@ -184,6 +202,7 @@ export function ProjectTemplate({
   const howItWorks = HOW_IT_WORKS[projectSlug];
   const features = FEATURES[projectSlug];
   const aboutExtra = ABOUT_EXTRA[projectSlug];
+  const screenshots = SCREENSHOTS[projectSlug];
 
   return (
     <div className="min-h-screen bg-[#0F172A]">
@@ -243,6 +262,29 @@ export function ProjectTemplate({
           </div>
         </div>
       </section>
+
+      {/* ── SCREENSHOTS ────────────────────────────────────────────────────── */}
+      {screenshots.length > 0 && (
+        <section className={`${t.sectionB} py-24 border-t border-slate-800`}>
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">See It In Action</h2>
+              <p className="text-slate-400 text-lg">Explore {project.name} with these real app screenshots</p>
+            </div>
+            <div className="space-y-6">
+              {screenshots.map((screenshot) => (
+                <div key={screenshot.src} className="group overflow-hidden rounded-lg">
+                  <img
+                    src={screenshot.src}
+                    alt={screenshot.alt}
+                    className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ── FEATURE GRID ───────────────────────────────────────────────────── */}
       <section className={`${t.sectionB} py-24 border-t border-slate-800`}>

@@ -194,43 +194,19 @@ export function HomePage() {
               </div>
             </motion.div>
 
-            {/* Right — mock app preview */}
+            {/* Right — screenshot */}
             <motion.div
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
               className="hidden lg:block"
             >
-              <div className="bg-slate-900 rounded-2xl p-6 shadow-2xl max-w-sm mx-auto ring-1 ring-amber-900/30">
-                <div className="flex items-center justify-between mb-6">
-                  <span className="text-white font-bold text-lg">Ascend</span>
-                  <span className="text-2xl">⚡</span>
-                </div>
-                <div className="bg-slate-800 rounded-xl p-4 mb-4">
-                  <p className="text-slate-400 text-xs font-semibold uppercase tracking-wider mb-2">Current Streak</p>
-                  <div className="flex items-end gap-2">
-                    <span className="text-white text-4xl font-bold">47</span>
-                    <span className="text-amber-400 text-lg mb-1">🔥 days</span>
-                  </div>
-                </div>
-                <div className="space-y-2.5">
-                  {[
-                    { label: 'Morning Run', done: true },
-                    { label: 'No Social Media', done: true },
-                    { label: 'Read 30 min', done: false },
-                  ].map((habit) => (
-                    <div key={habit.label} className="flex items-center gap-3 bg-slate-800 rounded-lg px-3 py-2.5">
-                      <div className={`w-4 h-4 rounded-full flex-shrink-0 ${habit.done ? 'bg-green-500' : 'bg-slate-600'}`} />
-                      <span className={`text-sm font-medium ${habit.done ? 'text-white' : 'text-slate-400'}`}>
-                        {habit.label}
-                      </span>
-                      {habit.done && <CheckCircle size={14} className="text-green-400 ml-auto" />}
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-4 bg-blue-600 rounded-lg px-4 py-2.5 text-center">
-                  <span className="text-white text-sm font-semibold">🏆 #3 on Leaderboard</span>
-                </div>
+              <div className="rounded-2xl overflow-hidden shadow-2xl ring-1 ring-amber-900/30 hover:ring-amber-900/50 transition-all duration-300">
+                <img
+                  src="/images/projects/ascend-dashboard.png"
+                  alt="Ascend Dashboard"
+                  className="w-full h-auto"
+                />
               </div>
             </motion.div>
           </div>
@@ -284,36 +260,16 @@ export function HomePage() {
               </Link>
             </motion.div>
 
-            <motion.div variants={fadeUp} className="grid grid-cols-1 gap-4">
-              {[
-                {
-                  icon: <Globe size={22} className="text-teal-400" />,
-                  title: 'Interactive 3D Globe',
-                  desc: 'Visualize global events on a fully interactive globe with real-time data overlays.',
-                },
-                {
-                  icon: <Shield size={22} className="text-cyan-400" />,
-                  title: 'Intelligence Analysis',
-                  desc: 'Deep-dive reports and trend analysis on geopolitical hotspots worldwide.',
-                },
-                {
-                  icon: <TrendingUp size={22} className="text-blue-400" />,
-                  title: 'Predictive Insights',
-                  desc: 'Pattern recognition that surfaces emerging threats before they escalate.',
-                },
-              ].map((item) => (
-                <div key={item.title} className="flex items-start gap-4 bg-slate-800/60 backdrop-blur-sm rounded-xl p-5 border border-slate-700/60 hover:border-teal-800 transition-colors duration-200">
-                  <div className="mt-0.5 flex-shrink-0">{item.icon}</div>
-                  <div>
-                    <h3 className="text-white font-semibold mb-1">{item.title}</h3>
-                    <p className="text-slate-400 text-sm leading-relaxed">{item.desc}</p>
-                  </div>
-                </div>
-              ))}
-              <p className="text-slate-600 text-sm text-center mt-2 italic">
-                Trusted by analysts, researchers, and decision-makers worldwide.
-              </p>
+            <motion.div variants={fadeUp} className="rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
+              <img
+                src="/images/projects/geointel-dashboard.png"
+                alt="GeoIntel Dashboard"
+                className="w-full h-auto object-contain"
+              />
             </motion.div>
+            <p className="text-slate-600 text-sm text-center italic">
+              Trusted by analysts, researchers, and decision-makers worldwide.
+            </p>
           </motion.div>
         </div>
       </section>
