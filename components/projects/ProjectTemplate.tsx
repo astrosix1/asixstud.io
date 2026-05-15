@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight, BarChart3, Trophy, TrendingUp, Users, Star, Cloud, Globe, Zap, Shield, Database, Bell } from 'lucide-react';
+import { ArrowRight, BarChart3, Trophy, TrendingUp, Users, Star, Cloud, Globe, Zap, Shield, Database, Bell, BookOpen, Brain } from 'lucide-react';
 import { AccessBanner } from './AccessBanner';
 
 interface ProjectTemplateProps {
@@ -15,7 +15,7 @@ interface ProjectTemplateProps {
     features: string[];
     externalUrl?: string;
   };
-  projectSlug: 'ascend' | 'geointel';
+  projectSlug: 'ascend' | 'geointel' | 'wikihole';
   launchButtonComponent?: React.ReactNode;
   userHasAccess?: boolean;
 }
@@ -54,9 +54,25 @@ const THEMES = {
     icon: '🌍',
     label: 'Intelligence Platform',
   },
+  wikihole: {
+    heroBg: 'from-[#0F172A] to-[#1A1209]',
+    sectionA: 'bg-[#111827]',
+    sectionB: 'bg-[#0F172A]',
+    glow1: 'bg-orange-500',
+    glow2: 'bg-amber-700',
+    badgeBg: 'bg-orange-900/40',
+    badgeText: 'text-orange-300',
+    badgeBorder: 'border-orange-800/60',
+    accent: 'text-orange-400',
+    stepAccent: 'text-orange-400',
+    btnPrimary: 'bg-orange-500 hover:bg-orange-600 text-white',
+    cardHover: 'hover:border-orange-900/50',
+    icon: '🕳️',
+    label: 'Learning & Discovery',
+  },
 } as const;
 
-// ── How It Works content ──────────────────────────────────────────────────────
+// ── How It Works content ─────────────────────────────────────────────────────
 const HOW_IT_WORKS = {
   ascend: [
     {
@@ -92,9 +108,26 @@ const HOW_IT_WORKS = {
       desc: 'Pattern recognition surfaces what\'s coming before it makes headlines. Stay ahead of the curve.',
     },
   ],
+  wikihole: [
+    {
+      step: '01', emoji: '🕳️',
+      title: 'Fall Down a Rabbit Hole',
+      desc: 'Pick any mystery, cryptid, or paranormal topic from our curated seed library — all 60+ articles load instantly, no waiting.',
+    },
+    {
+      step: '02', emoji: '🔗',
+      title: 'Follow the Links',
+      desc: 'Every article surfaces three related rabbit holes. Dive as deep as you want — your full trail is saved and resumable.',
+    },
+    {
+      step: '03', emoji: '🧠',
+      title: 'Quiz What You Learned',
+      desc: 'Claude reads every article you visit and generates spaced-repetition flash cards. Revisit them on schedule and actually retain what you explored.',
+    },
+  ],
 };
 
-// ── Feature grids ─────────────────────────────────────────────────────────────
+// ── Feature grids ────────────────────────────────────────────────────────────
 const FEATURES = {
   ascend: {
     heading: 'Everything you need to succeed',
@@ -120,12 +153,25 @@ const FEATURES = {
       { icon: <Bell size={24} className="text-amber-400" />, title: 'Custom Alerts', desc: 'Get notified the moment situations in your watchlist change or escalate.' },
     ],
   },
+  wikihole: {
+    heading: 'Exploration that actually sticks',
+    sub: 'Wikipedia rabbit holes, now with memory',
+    items: [
+      { icon: <BookOpen size={24} className="text-orange-400" />, title: 'Curated Rabbit Holes', desc: '60+ seed articles spanning mysteries, cryptids, paranormal phenomena, and sea creatures — all instant load.' },
+      { icon: <Zap size={24} className="text-amber-400" />, title: 'AI Quiz Generation', desc: 'Claude reads every article you explore and auto-generates multiple-choice questions tailored to what you just learned.' },
+      { icon: <TrendingUp size={24} className="text-orange-300" />, title: 'Spaced Repetition', desc: 'A full SM-2 algorithm schedules each card so you see it again just before you forget it.' },
+      { icon: <Database size={24} className="text-yellow-400" />, title: 'Trail History', desc: 'Every rabbit hole session is saved. Resume exactly where you left off — days or weeks later.' },
+      { icon: <Cloud size={24} className="text-sky-400" />, title: 'Offline Support', desc: 'Visited articles are cached locally. Keep reading even without a connection.' },
+      { icon: <Brain size={24} className="text-amber-400" />, title: 'Mastery Tracking', desc: 'See your knowledge score per rabbit hole trail. Unlock mastery when you ace all the cards.' },
+    ],
+  },
 };
 
-// ── About copy ────────────────────────────────────────────────────────────────
+// ── About copy ───────────────────────────────────────────────────────────────
 const ABOUT_EXTRA = {
   ascend: 'Whether you\'re looking to kick a habit or build a positive one, Ascend provides the tools, community, and motivation to succeed. Track your progress, compete with friends, and celebrate milestones along the way.',
   geointel: 'Trusted by analysts, researchers, and decision-makers worldwide. GeoIntel turns raw global data into actionable foresight — so you\'re never caught off guard by what happens next.',
+  wikihole: 'Whether you spend 20 minutes or 3 hours going down a rabbit hole, WikiHole turns every session into a spaced learning loop. Included free in the Essentials plan — no extra charge on top of your subscription.',
 };
 
 export function ProjectTemplate({
@@ -182,7 +228,7 @@ export function ProjectTemplate({
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">How It Works</h2>
             <p className="text-slate-400 text-lg">
-              {projectSlug === 'ascend' ? 'Three steps to a better habit loop' : 'Three steps to sharper intelligence'}
+              {projectSlug === 'ascend' ? 'Three steps to a better habit loop' : projectSlug === 'geointel' ? 'Three steps to sharper intelligence' : 'Three steps to lasting knowledge'}
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
@@ -236,7 +282,9 @@ export function ProjectTemplate({
           <p className="text-xl text-slate-400 mb-10">
             {projectSlug === 'ascend'
               ? 'Start your journey to replace addictions with hobbies today.'
-              : 'Unlock geopolitical intelligence and stay ahead of global events.'}
+              : projectSlug === 'geointel'
+              ? 'Unlock geopolitical intelligence and stay ahead of global events.'
+              : 'Start exploring rabbit holes — included free in the Essentials plan.'}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             {launchButtonComponent ? (

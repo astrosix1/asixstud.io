@@ -45,6 +45,29 @@ export const PROJECTS = {
       'Historical event tracking',
     ],
   },
+  wikihole: {
+    id: 'wikihole',
+    name: 'WikiHole',
+    slug: 'wikihole',
+    tagline: 'The rabbit hole that sticks',
+    description:
+      'A spaced-repetition learning app built around Wikipedia rabbit holes. Follow curiosity, then quiz yourself on what you discovered.',
+    longDescription:
+      'WikiHole lets you explore curated rabbit holes — mysteries, cryptids, paranormal phenomena — and turns every article into spaced-repetition quiz cards via Claude. Casual exploration becomes lasting knowledge.',
+    icon: '🕳️',
+    color: '#F97316', // Orange — warm candy
+    image: '/images/projects/wikihole.png',
+    category: 'Learning & Discovery',
+    iframeUrl: null,
+    externalUrl: 'https://wikihole.asix.live/',
+    features: [
+      'Curated Wikipedia rabbit holes',
+      'AI-generated spaced-repetition quiz cards',
+      'Trail history — resume any rabbit hole',
+      'Offline support for cached articles',
+      'Mastery tracking per topic',
+    ],
+  },
   heavyPocket: {
     id: 'heavy-pocket',
     name: 'Heavy Pocket',

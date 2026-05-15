@@ -6,7 +6,7 @@ import { useSubscription } from '@/hooks/useSubscription';
 
 interface ProjectTemplateWrapperProps {
   project: any;
-  projectSlug: 'ascend' | 'geointel';
+  projectSlug: 'ascend' | 'geointel' | 'wikihole';
   launchButtonComponent?: React.ReactNode;
 }
 

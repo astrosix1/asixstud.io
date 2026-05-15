@@ -24,7 +24,8 @@ interface DashboardSubscription {
 // Available products — used to build the Explore section
 const ALL_PRODUCTS = [
   { slug: 'ascend',   name: 'Ascend',   icon: '⚡', tagline: 'Replace addictions with hobbies', accent: 'text-amber-400', border: 'hover:border-amber-800/60' },
-  { slug: 'geointel', name: 'GeoIntel', icon: '🌍', tagline: 'Live world events on a 3D globe',  accent: 'text-teal-400',  border: 'hover:border-teal-800/60' },
+  { slug: 'geointel', name: 'GeoIntel', icon: '🌍', tagline: 'Live world events on a 3D globe',  accent: 'text-teal-400',   border: 'hover:border-teal-800/60'   },
+  { slug: 'wikihole', name: 'WikiHole', icon: '🕳️', tagline: 'The rabbit hole that sticks',      accent: 'text-orange-400', border: 'hover:border-orange-800/60' },
 ];
 
 function getGreeting() {
